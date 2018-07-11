@@ -9,6 +9,8 @@ def add_php_fpm_pool(metadata):
 
         metadata['php-fpm']['pools']['mediawiki'] = {
             'disable_functions': True,
+            'user': 'mediawiki',
+            'group': 'mediawiki',
         }
 
     return metadata, DONE
