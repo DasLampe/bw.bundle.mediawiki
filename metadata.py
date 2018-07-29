@@ -14,3 +14,12 @@ def add_php_fpm_pool(metadata):
         }
 
     return metadata, DONE
+
+@metadata_processor
+def add_mediawiki_user(metadata):
+    metadata['users']['mediawiki'] = {
+        'shell': '/usr/sbin/nologin',
+        'ssh_pubkeys': [],
+    }
+
+    return metadata, DONE
