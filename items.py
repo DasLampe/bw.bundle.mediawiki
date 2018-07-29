@@ -1,9 +1,3 @@
-users = {
-    'mediawiki': {
-        'shell': '/usr/sbin/nologin',
-    }
-}
-
 pkg_apt = {
     'php': {},
     'php-mbstring': {},
@@ -20,13 +14,6 @@ mysql_user = wiki.get('db', {}).get('user', 'wiki')
 mysql_password = wiki.get('db', {}).\
     get('password', repo.libs.pw.get("mysql_{}_user_{}".format(mysql_user, node.name)))
 
-directories = {
-    '/home/mediawiki': {
-        'owner': 'mediawiki',
-        'group': 'mediawiki',
-    },
-}
-
 downloads = {
     '/home/mediawiki/mediawiki-{}.tar.gz'.format(wikiversion): {
         'url': 'https://releases.wikimedia.org/mediawiki/' \
@@ -37,9 +24,6 @@ downloads = {
             ),
         'sha256': wiki.get('sha256', \
                  'f2273eac60ba5e141143c27caaed1eb3505c339455f5834b757c0e34c1782077'),
-        'needs': [
-            'directory:/home/mediawiki',
-        ],
         'unless': 'test -f /home/mediawiki/mediawiki-{}.tar.gz' \
             .format(wikiversion),
     },
@@ -48,7 +32,9 @@ downloads = {
 symlinks = {
     '/home/mediawiki/mediawiki': {
         'target': '/home/mediawiki/mediawiki-{}'.format(wikiversion),
-        'triggered': True,
+        'needs': [
+            'action:unpack_mediawiki',
+        ],
     },
 
 }
@@ -63,7 +49,6 @@ actions = {
         ],
         'triggers': [
             'action:chown_mediawiki',
-            'symlink:/home/mediawiki/mediawiki',
         ],
     },
     'chown_mediawiki': {
