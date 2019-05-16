@@ -1,11 +1,3 @@
-pkg_apt = {
-    'php': {},
-    'php-mbstring': {},
-    'php-xml': {},
-    'php-mysql': {},
-    'php-imagick': {},
-}
-
 wikiversion = node.metadata.get('mediawiki', {}).get('version', '1.31.0')
 wiki = node.metadata.get('mediawiki', {})
 mysql_db = wiki.get('mediawiki', {}).get('db', {}).get('db', 'wiki')

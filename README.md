@@ -7,7 +7,8 @@ Install MediaWiki (version 1.31.0 tested) to /home/mediawiki/mediawiki/.
 - Setup MediaWiki tables
 
 ## Dependencies
-MySQL-Bundle (not published yet)
+- MySQL-Bundle (not published yet)
+- [apt-Bundle](https://github.com/sHorst/bw.bundle.apt)
 
 ## Suggestion
 PHP-FPM Bundle (https://github.com/DasLampe/bw.bundle.php-fpm/tree/development)

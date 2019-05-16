@@ -1,4 +1,19 @@
 @metadata_processor
+def add_apt_packages(metadata):
+    if node.has_bundle("apt"):
+        metadata.setdefault('apt', {})
+        metadata['apt'].setdefault('packages', {})
+
+        metadata['apt']['packages']['php'] = {'installed': True}
+        metadata['apt']['packages']['php-mbstring'] = {'installed': True}
+        metadata['apt']['packages']['php-xml'] = {'installed': True}
+        metadata['apt']['packages']['php-mysql'] = {'installed': True}
+        metadata['apt']['packages']['php-imagick'] = {'installed': True}
+
+    return metadata, DONE
+
+
+@metadata_processor
 def add_php_fpm_pool(metadata):
     if node.has_bundle('php-fpm'):
         if 'php-fpm' not in metadata:
